@@ -1,0 +1,34 @@
+﻿@model Weather_App.Models.WeatherResponse
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🌦️ Weather App</h2>
+
+    <form method="post" class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <div class="input-group">
+                <input type="text" name="city" class="form-control" placeholder="Enter city (e.g. Pretoria)" required />
+                <button type="submit" class="btn btn-primary">Get Weather</button>
+            </div>
+        </div>
+    </form>
+
+    @if (Model != null)
+    {
+        <div class="card mx-auto text-center" style="max-width: 400px;">
+            <div class="card-body">
+                <h4 class="card-title">@Model.name</h4>
+                <img src="@($"https://openweathermap.org/img/wn/{Model.weather[0].icon}@2x.png")" class="mb-2" />
+                <p class="card-text"><strong>Temp:</strong> @Model.main.temp °C</p>
+                <p class="card-text"><strong>Humidity:</strong> @Model.main.humidity %</p>
+                <p class="card-text"><strong>Wind Speed:</strong> @Model.wind.speed m/s</p>
+                <p class="card-text"><strong>Description:</strong> @Model.weather[0].description</p>
+            </div>
+        </div>
+    }
+    else if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger text-center">@ViewBag.Error</div>
+    }
+</div>
+
+
